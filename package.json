@@ -5,7 +5,8 @@
   "main": "imagesloaded.js",
   "types": "imagesloaded.d.ts",
   "files": [
-    "imagesloaded*.js"
+    "imagesloaded*.js",
+    "imagesloaded.d.ts"
   ],
   "dependencies": {
     "ev-emitter": "^2.1.2"

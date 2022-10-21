@@ -31,6 +31,11 @@ declare namespace ImagesLoaded {
       on(event: string, listener: ImagesLoadedListener): void;
       off(event: string, listener: ImagesLoadedListener): void;
       once(event: string, listener: ImagesLoadedListener): void;
+
+      check(): void;
+      getImages(): HTMLImageElement[];
+      addElementImages(elem: HTMLImageElement): void;
+      addElementBackgroundImages(elem: HTMLElement): void;
     }
   
     interface ImagesLoadedOptions {

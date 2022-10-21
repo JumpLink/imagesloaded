@@ -54,7 +54,8 @@ declare namespace ImagesLoaded {
   declare var imagesLoaded: ImagesLoaded.ImagesLoadedConstructor;
   
   declare module 'imagesloaded' {
-    export = imagesLoaded;
+    export default imagesLoaded;
+    export { imagesLoaded };
   }
   
   interface JQuery {

@@ -17,7 +17,6 @@
 } )( typeof window !== 'undefined' ? window : this,
     function factory( window, EvEmitter ) {
 
-let $ = window.jQuery;
 let console = window.console;
 
 // -------------------------- helpers -------------------------- //
@@ -71,8 +70,6 @@ function ImagesLoaded( elem, options, onAlways ) {
   if ( onAlways ) this.on( 'always', onAlways );
 
   this.getImages();
-  // add jQuery Deferred object
-  if ( $ ) this.jqDeferred = new $.Deferred();
 
   // HACK check async to allow time to bind listeners
   setTimeout( this.check.bind( this ) );
@@ -181,9 +178,7 @@ ImagesLoaded.prototype.progress = function( image, elem, message ) {
   this.hasAnyBroken = this.hasAnyBroken || !image.isLoaded;
   // progress event
   this.emitEvent( 'progress', [ this, image, elem ] );
-  if ( this.jqDeferred && this.jqDeferred.notify ) {
-    this.jqDeferred.notify( this, image );
-  }
+
   // check if completed
   if ( this.progressedCount === this.images.length ) {
     this.complete();
@@ -199,10 +194,6 @@ ImagesLoaded.prototype.complete = function() {
   this.isComplete = true;
   this.emitEvent( eventName, [ this ] );
   this.emitEvent( 'always', [ this ] );
-  if ( this.jqDeferred ) {
-    let jqMethod = this.hasAnyBroken ? 'reject' : 'resolve';
-    this.jqDeferred[ jqMethod ]( this );
-  }
 };
 
 // --------------------------  -------------------------- //
@@ -316,25 +307,6 @@ Background.prototype.confirm = function( isLoaded, message ) {
   this.isLoaded = isLoaded;
   this.emitEvent( 'progress', [ this, this.element, message ] );
 };
-
-// -------------------------- jQuery -------------------------- //
-
-ImagesLoaded.makeJQueryPlugin = function( jQuery ) {
-  jQuery = jQuery || window.jQuery;
-  if ( !jQuery ) return;
-
-  // set local variable
-  $ = jQuery;
-  // $().imagesLoaded()
-  $.fn.imagesLoaded = function( options, onAlways ) {
-    let instance = new ImagesLoaded( this, options, onAlways );
-    return instance.jqDeferred.promise( $( this ) );
-  };
-};
-// try making plugin
-ImagesLoaded.makeJQueryPlugin();
-
-// --------------------------  -------------------------- //
 
 return ImagesLoaded;
 

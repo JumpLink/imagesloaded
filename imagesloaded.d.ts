@@ -5,8 +5,6 @@
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 // TypeScript Version: 2.3
 
-/// <reference types="jquery" />
-
 declare namespace ImagesLoaded {
     type ElementSelector = Element | NodeList | Array<Element> | string;
   
@@ -54,12 +52,6 @@ declare namespace ImagesLoaded {
   declare var imagesLoaded: ImagesLoaded.ImagesLoadedConstructor;
   
   declare module 'imagesloaded' {
-    export default imagesLoaded;
-    export { imagesLoaded };
-  }
-  
-  interface JQuery {
-    imagesLoaded(callback?: ImagesLoaded.ImagesLoadedCallback): JQueryDeferred<ImagesLoaded.ImagesLoaded>;
-    imagesLoaded(options: ImagesLoaded.ImagesLoadedOptions, callback?: ImagesLoaded.ImagesLoadedCallback): JQueryDeferred<ImagesLoaded.ImagesLoaded>;
+    export = imagesLoaded;
   }
   

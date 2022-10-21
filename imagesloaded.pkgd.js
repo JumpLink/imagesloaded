@@ -329,6 +329,12 @@ LoadingImage.prototype.check = function() {
     return;
   }
 
+  // Continue only if there is a non empty src
+  const src = this.img.currentSrc || this.img.src;
+  if ( !src ) {
+    return;
+  }
+
   // If none of the checks above matched, simulate loading on detached element.
   this.proxyImage = new Image();
   // add crossOrigin attribute. #204
@@ -340,7 +346,7 @@ LoadingImage.prototype.check = function() {
   // bind to image as well for Firefox. #191
   this.img.addEventListener( 'load', this );
   this.img.addEventListener( 'error', this );
-  this.proxyImage.src = this.img.currentSrc || this.img.src;
+  this.proxyImage.src = src;
 };
 
 LoadingImage.prototype.getIsImageComplete = function() {

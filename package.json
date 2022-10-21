@@ -3,6 +3,7 @@
   "version": "5.0.0",
   "description": "JavaScript is all like _You images done yet or what?_",
   "main": "imagesloaded.js",
+  "types": "imagesloaded.d.ts",
   "files": [
     "imagesloaded*.js"
   ],
